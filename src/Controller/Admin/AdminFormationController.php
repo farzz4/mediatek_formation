@@ -135,7 +135,7 @@ class AdminFormationController extends AbstractController
                 'success',
                 'Ajout de la formation ' . $formation->getTitle() . ' prise en compte');
             return $this->redirectToRoute('admin.formations');
-        }     
+        }
 
         return $this->render(self::PAGE_FORMATION, [
             'formation' => $formation,
