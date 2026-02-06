@@ -1,33 +1,57 @@
-{% extends "basefront.html.twig" %}
+{% extends 'baseadmin.html.twig' %}
 {% block body %}
-    <div class="row mt-3">
-        <div class="col">
-            <!-- emplacement de la vidéo -->
-            {% if formation.videoid %}
-                <div style="width: 560px; height: 315px; float: none; clear: both; margin: 2px auto;">
-                  <embed
-                    src="https://www.youtube.com/embed/{{ formation.videoid }}" 
-                    wmode="transparent"
-                    type="video/mp4"
-                    width="100%" height="100%"
-                    allow="autoplay; clipboard-write; encrypted-media; picture-in-picture"
-                    allowfullscreen
-                    title="YouTube video player"
-                  >
-                </div>
-            {% endif %}
-        </div>
-        <div class="col">
-            {{ formation.publishedatstring }}
-            <h4 class="text-info mt-5">{{ formation.title }}</h4>
-            <strong>playlist : </strong>{{ formation.playlist }}<br />
-            <strong>catégories : </strong>
-                {% for categorie in formation.categories %}
-                    {{ categorie.name }}&nbsp;
-                {% endfor %}
-            <br /><br />
-            <strong>description :</strong><br />
-                {{ formation.description|nl2br }}
-        </div>
-    </div>
+    <table class="table table-striped">
+        <caption>tableau des formations</caption>
+        <thead>
+            <tr>
+                <th class="text-left align-top" scope="col">
+                    <form>
+                        <a href="{{ path('formations.sort', { champ: 'title', ordre: 'ASC' }) }}" class="btn btn-warning btn-sm active" role="button" aria-pressed="true"><<</a>
+                        <a href="{{ path('formations.sort', { champ: 'title', ordre: 'DESC' }) }}" class="btn btn-warning btn-sm active" role="button" aria-pressed="true">>></a>
+                        <form class="form-inline mt-1" method="POST" action="{{ path('formations.findallcontain', { champ: 'title' }) }}">
+                            <div class="form-group mr-1 mb-2">
+                                <input type="text" class="form-control" name="recherche"
+                                    value="{% if valeur|default and table|default and table=='formations' %}{{ valeur }}{% endif %}">
+                                <input type="hidden" name="_token" value="{{ csrf_token('filtre_title') }}">
+                                <button type="submit" class="btn btn-warning mb-2 btn-sm">filtrer</button>
+                            </div>
+                        </form>
+                    </form>
+                </th>
+                <th class="text-left align-top" scope="col">
+                    playlist<br />
+                    <a href="{{ path('formations.sort', { table: 'playlist', champ: 'name', ordre: 'ASC' }) }}" class="btn btn-warning btn-sm active" role="button" aria-pressed="true"><<</a>
+                    <a href="{{ path('formations.sort', { table: 'playlist', champ: 'name', ordre: 'DESC' }) }}" class="btn btn-warning btn-sm active" role="button" aria-pressed="true">>></a>
+                    <form class="form-inline mt-1" method="POST" action="{{ path('formations.findallcontain', { champ: 'name', table: 'playlist' }) }}">
+                        <div class="form-group mr-1 mb-2">
+                            <input type="text" class="form-control" name="recherche"
+                                value="{% if valeur|default and table|default and table=='playlist' %}{{ valeur }}{% endif %}">
+                            <input type="hidden" name="_token" value="{{ csrf_token('filtre_name') }}">
+                            <button type="submit" class="btn btn-warning mb-2 btn-sm">filtrer</button>
+                        </div>
+                    </form>
+                </th>
+                <th class="text-left align-top" scope="col">
+                    categories<br />
+                    <form class="form-inline mt-1" method="POST" action="{{ path('formations.findallcontain', { champ: 'id', table: 'categories' }) }}">
+                        <select class="form-select form-select-sm" name="recherche" id="recherche" onchange="this.form.submit()">
+                            <option value="">--</option>
+                            {% for categorie in categories %}
+                                <option {% if valeur|default and valeur==categorie.id %} selected {% endif %} value="{{ categorie.id }}">{{ categorie.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </form>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for formation in formations %}
+                <tr>
+                    <td>{{ formation.title }}</td>
+                    <td>{{ formation.playlist.name }}</td>
+                    <td>{{ formation.categorie.name }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 {% endblock %}

@@ -14,24 +14,21 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class AdminFormationController extends AbstractController
 {
     const PAGE_FORMATIONS = "pages/admin/formations.html.twig";
-
     const PAGE_FORMATION = "pages/admin/formation.html.twig";
 
     /**
-     *
      * @var FormationRepository
      */
     private $formationRepository;
     
     /**
-     *
      * @var CategorieRepository
      */
     private $categorieRepository;
     
     public function __construct(FormationRepository $formationRepository, CategorieRepository $categorieRepository) {
         $this->formationRepository = $formationRepository;
-        $this->categorieRepository= $categorieRepository;
+        $this->categorieRepository = $categorieRepository;
     }
     
     /**
@@ -42,13 +39,14 @@ class AdminFormationController extends AbstractController
         $formations = $this->formationRepository->findAll();
         $categories = $this->categorieRepository->findAll();
         return $this->render(self::PAGE_FORMATIONS, [
+                    'controller_name' => 'AdminFormationController', // ← Ajoutez cette ligne
             'formations' => $formations,
             'categories' => $categories
         ]);
     }
 
     /**
-     * @Route("/admin/formations/tri/{champ}/{ordre}/{table}", name="admin.formations.sort")
+     * @Route("/admin/formations/tri/{champ}/{ordre}/{table}", name="formations.sort")
      * @param type $champ
      * @param type $ordre
      * @param type $table
@@ -64,7 +62,7 @@ class AdminFormationController extends AbstractController
     }
     
     /**
-     * @Route("/admin/formations/recherche/{champ}/{table}", name="admin.formations.findallcontain")
+     * @Route("/admin/formations/recherche/{champ}/{table}", name="formations.findallcontain")
      * @param type $champ
      * @param Request $request
      * @param type $table

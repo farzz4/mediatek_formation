@@ -1,46 +1,182 @@
 {% extends "base.html.twig" %}
 
-{% block title %}{% endblock %}
-{% block stylesheets %}{% endblock %}
+{% block title %}Administration - MediaTek86{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <!-- CSS spécifique à l'admin -->
+    <style>
+        /* Styles pour l'admin */
+        .admin-container {
+            margin-top: 20px;
+        }
+        
+        /* Amélioration des tables */
+        .table-admin {
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        
+        .table-admin th {
+            background-color: #f8f9fa;
+            font-weight: 600;
+            vertical-align: middle !important;
+        }
+        
+        /* Boutons d'action */
+        .btn-action {
+            margin: 2px;
+        }
+        
+        /* Filtres */
+        .filtre-form {
+            margin-bottom: 5px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .btn-action {
+                display: block;
+                width: 100%;
+                margin-bottom: 5px;
+            }
+        }
+    </style>
+{% endblock %}
+
 {% block top %}
     <div class="container">
-        <!-- titre -->
+        <!-- bannière à gauche -->
         <div class="row">
-            <div class="col-6 text-left">
-                <img src="{{ app.request.getBasePath()~'/adminbanniere.jpg' }}" alt="img banniere" >
-            </div>
-            <div class="col-6 d-flex align-items-center">
-                <h2 class=""><strong>🚧 Back office 🚧</strong></h2>
+            <div class="col-12 text-left">
+                <img src="{{ asset('banniere.jpg') }}" alt="MediaTek86 - Des formations pour tous sur des outils numériques" class="img-fluid" style="max-height: 120px;">
             </div>
         </div>
         <!-- menu -->
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light mt-3">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ path('admin.formations')}}">Formations</a>
+                        <a class="nav-link {% if app.request.attributes.get('_route') == 'admin.formations' %}active font-weight-bold{% endif %}" 
+                           href="{{ path('admin.formations') }}">
+                            Tableau de bord
+                        </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ path('admin.playlists')}}">Playlists</a>
+                        <a class="nav-link {% if app.request.attributes.get('_route') == 'app_admin_formation' %}active font-weight-bold{% endif %}" 
+                           href="{{ path('app_admin_formation') }}">
+                            Formations
+                        </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ path('admin.categories')}}">Catégories</a>
+                        <a class="nav-link {% if app.request.attributes.get('_route') == 'admin.playlists' %}active font-weight-bold{% endif %}" 
+                           href="{{ path('admin.playlists') }}">
+                            Playlists
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if app.request.attributes.get('_route') == 'admin.categories' %}active font-weight-bold{% endif %}" 
+                           href="{{ path('admin.categories') }}">
+                            Catégories
+                        </a>
+                    </li>
+                </ul>
+                
+                <!-- Lien retour au site -->
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link btn btn-outline-primary btn-sm" href="{{ path('accueil') }}">
+                            <i class="fas fa-home"></i> Retour au site
+                        </a>
                     </li>
                 </ul>
             </div>
         </nav>
     </div>
 {% endblock %}
-{% block body %}{% endblock %}
+
+{% block body %}
+    <div class="container admin-container">
+        <h1 class="mb-4">
+            {% block page_title %}Administration{% endblock %}
+        </h1>
+        
+        <!-- Messages flash -->
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        {% endfor %}
+        
+        {% for message in app.flashes('warning') %}
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        {% endfor %}
+        
+        {% for message in app.flashes('error') %}
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        {% endfor %}
+        
+        <!-- Contenu spécifique de la page -->
+        {% block admin_content %}
+            <div class="alert alert-info">
+                Sélectionnez une section dans le menu ci-dessus.
+            </div>
+        {% endblock %}
+    </div>
+{% endblock %}
+
 {% block footer %}
-    <div class="container text-center">
+    <div class="container text-center mt-5">
         <footer>
             <hr>
             <p><small><i>
                 Consultez nos <a class="link-secondary" href="{{ path('cgu') }}">Conditions Générales d'Utilisation</a>
             </i></small></p>
-            
+            <p class="text-muted">
+                <small>
+                    &copy; {{ "now"|date("Y") }} MediaTek86 - Interface d'administration
+                </small>
+            </p>
         </footer>
     </div>
 {% endblock %}
-{% block javascripts %}{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <!-- Font Awesome pour les icônes -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    
+    <script>
+        // Scripts spécifiques à l'admin
+        $(document).ready(function() {
+            // Auto-dismiss des alertes après 5 secondes
+            setTimeout(function() {
+                $('.alert').alert('close');
+            }, 5000);
+            
+            // Confirmation pour les suppressions
+            $('.btn-supprimer').on('click', function(e) {
+                if (!confirm('Êtes-vous sûr de vouloir supprimer cet élément ?')) {
+                    e.preventDefault();
+                }
+            });
+        });
+    </script>
+{% endblock %}
