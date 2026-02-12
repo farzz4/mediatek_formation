@@ -13,18 +13,19 @@
     </p>
     <p>
         Voici les <strong>deux dernières formations</strong> ajoutées au catalogue :
-        <div class="container">
-            <div class="row">
+    <table class="table">
+        <caption></caption>
+            <tr>
                 {% for formation in formations %}
-                    <div class="col">
+                    <td>
                         <div class="row">
                             <div class="col">
                                 <!-- emplacement photo -->
                                 {% if formation.picture %}
                                     <a href="{{ path('formations.showone', {id:formation.id}) }}">
-                                    <img src="{{ formation.picture }}" 
-                                         class="card-img-top" style="width:100%;height:auto;" alt="image de la formation">
-                                    </a>
+                                    <img src="{{ formation.picture }} " alt="image réduite de formation"
+                                         class="card-img-top" style="width:100%;height:auto;">
+                                    </a>    
                                 {% endif %}
                             </div>
                             <div class="col">
@@ -32,17 +33,17 @@
                                 <h5 class="text-info mt-1">
                                     {{ formation.title }}
                                 </h5>
-                                <strong>playlist : </strong>{{ formation.playlist }}<br />
+                                <strong>playlist : </strong>{{ formation.playlist.name }}<br />
                                 <strong>catégories : </strong> 
                                 {% for categorie in formation.categories %}
                                     {{ categorie.name }}&nbsp;
                                 {% endfor %}
-                            </div>
-                        </div>
-                    </div>
-                {% endfor %}
-            </div>
-        </div>
+                            </div>    
+                        </div>                    
+                {% endfor %}    
+            </tr>
+
+        </table>        
     </p>
 {% endblock %}
 

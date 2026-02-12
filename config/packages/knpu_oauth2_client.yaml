@@ -1,0 +1,10 @@
+knpu_oauth2_client:
+    clients:
+        keycloak:
+            type: keycloak
+            auth_server_url: '%env(KEYCLOAK_APP_URL)%'  # http://localhost:8080
+            realm: '%env(KEYCLOAK_REALM)%'            # myapplis
+            client_id: '%env(KEYCLOAK_CLIENTID)%'
+            client_secret: '%env(KEYCLOAK_SECRET)%'
+            redirect_route: 'oauth_check'
+            use_state: true   # pour éviter Invalid state parameter

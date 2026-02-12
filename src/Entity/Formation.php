@@ -7,19 +7,16 @@ use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass=FormationRepository::class)
- * @UniqueEntity(fields={"title"}, message="Ce nom est déjà utilisé !")
  */
 class Formation
 {
     /**
      * Début de chemin vers les images
      */
-    private const CHEMIN_IMAGE = "https://i.ytimg.com/vi/";
+    private const CHEMINIMAGE = "https://i.ytimg.com/vi/";
     
     /**
      * @ORM\Id
@@ -34,8 +31,7 @@ class Formation
     private $publishedAt;
 
     /**
-     * @ORM\Column(type="string", length=100, nullable=true, unique=true)
-     * @Assert\NotBlank()
+     * @ORM\Column(type="string", length=100, nullable=true)
      */
     private $title;
 
@@ -55,18 +51,13 @@ class Formation
     private $playlist;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Categorie::class, inversedBy="formations" )
+     * @ORM\ManyToMany(targetEntity=Categorie::class, inversedBy="formations")
      */
     private $categories;
 
     public function __construct()
     {
         $this->categories = new ArrayCollection();
-    }
-
-    public function __toString()
-    {
-        return $this->title . (($this->playlist == null) ? "" :  " Playlist : ") .$this->playlist;
     }
 
     public function getId(): ?int
@@ -90,8 +81,8 @@ class Formation
         if($this->publishedAt == null){
             return "";
         }
-        return $this->publishedAt->format('d/m/Y');
-    }
+        return $this->publishedAt->format('d/m/Y');     
+    }      
 
     public function getTitle(): ?string
     {
@@ -119,12 +110,12 @@ class Formation
 
     public function getMiniature(): ?string
     {
-        return self::CHEMIN_IMAGE.$this->videoId."/default.jpg";
+        return self::CHEMINIMAGE.$this->videoId."/default.jpg";
     }
 
     public function getPicture(): ?string
     {
-        return self::CHEMIN_IMAGE.$this->videoId."/hqdefault.jpg";
+        return self::CHEMINIMAGE.$this->videoId."/hqdefault.jpg";
     }
 
     public function getVideoId(): ?string

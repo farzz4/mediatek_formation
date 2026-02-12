@@ -19,29 +19,36 @@ class AccueilController extends AbstractController{
     private $repository;
     
     /**
-     *
+     * 
      * @param FormationRepository $repository
      */
     public function __construct(FormationRepository $repository) {
         $this->repository = $repository;
-    }
+    }   
     
     /**
-     * @Route("/", name="accueil")
-     * @return Response
-     */
-    public function index(): Response{
-        $formations = $this->repository->findAllLasted(2);
-        return $this->render("pages/accueil.html.twig", [
-            'formations' => $formations
-        ]);
+ * @Route("/", name="accueil")
+ */
+public function index(): Response {
+    // SI l'utilisateur est connecté (après un login réussi), on l'envoie vers l'admin
+    if ($this->getUser()) {
+        return $this->redirectToRoute('admin.formations');
     }
+
+    // SINON (après un logout ou première visite), on affiche simplement la vue
+    // SANS REDIRIGER vers Keycloak.
+    $formations = $this->repository->findAllLasted(2);
+    return $this->render("pages/accueil.html.twig", [
+        'formations' => $formations
+    ]); 
+}
+
     
     /**
      * @Route("/cgu", name="cgu")
      * @return Response
      */
     public function cgu(): Response{
-        return $this->render("pages/cgu.html.twig");
+        return $this->render("pages/cgu.html.twig"); 
     }
 }

@@ -8,37 +8,35 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use const PLAYLISTSPATH;
 
+define("PLAYLISTSPATH", "pages/playlists.html.twig");
 /**
  * Description of PlaylistsController
  *
  * @author emds
  */
 class PlaylistsController extends AbstractController {
-
-    const PAGE_PLAYLIST = "pages/playlist.html.twig";
     
-    const PAGE_PLAYLISTS = "pages/playlists.html.twig";
-
     /**
-     *
+     * 
      * @var PlaylistRepository
      */
     private $playlistRepository;
     
     /**
-     *
+     * 
      * @var FormationRepository
      */
     private $formationRepository;
     
     /**
-     *
+     * 
      * @var CategorieRepository
      */
-    private $categorieRepository;
+    private $categorieRepository;    
     
-    public function __construct(PlaylistRepository $playlistRepository,
+    function __construct(PlaylistRepository $playlistRepository, 
             CategorieRepository $categorieRepository,
             FormationRepository $formationRespository) {
         $this->playlistRepository = $playlistRepository;
@@ -53,9 +51,9 @@ class PlaylistsController extends AbstractController {
     public function index(): Response{
         $playlists = $this->playlistRepository->findAllOrderByName('ASC');
         $categories = $this->categorieRepository->findAll();
-        return $this->render(self::PAGE_PLAYLISTS, [
+        return $this->render("pages/playlists.html.twig", [
             'playlists' => $playlists,
-            'categories' => $categories
+            'categories' => $categories            
         ]);
     }
 
@@ -66,18 +64,20 @@ class PlaylistsController extends AbstractController {
      * @return Response
      */
     public function sort($champ, $ordre): Response{
-        if($champ == "name"){
-            $playlists = $this->playlistRepository->findAllOrderByName($ordre);
-        }
-        if($champ == "nombre"){
-            $playlists = $this->playlistRepository->findAllOrderByAmount($ordre);
+        switch($champ){
+            case "name":
+                $playlists = $this->playlistRepository->findAllOrderByName($ordre);
+                break;
+            case "nbformations":
+                $playlists = $this->playlistRepository->findAllOrderByNbFormations($ordre);
+                break;
         }
         $categories = $this->categorieRepository->findAll();
-        return $this->render(self::PAGE_PLAYLISTS, [
+        return $this->render(PLAYLISTSPATH, [
             'playlists' => $playlists,
-            'categories' => $categories
+            'categories' => $categories            
         ]);
-    }
+    }         
     
     /**
      * @Route("/playlists/recherche/{champ}/{table}", name="playlists.findallcontain")
@@ -88,15 +88,19 @@ class PlaylistsController extends AbstractController {
      */
     public function findAllContain($champ, Request $request, $table=""): Response{
         $valeur = $request->get("recherche");
-        $playlists = $this->playlistRepository->findByContainValue($champ, $valeur, $table);
+        if ($table != ""){
+        $playlists = $this->playlistRepository->findByContainValueTable($champ, $valeur, $table);
+        }else{
+            $playlists = $this->playlistRepository->findByContainValue($champ, $valeur);
+        }
         $categories = $this->categorieRepository->findAll();
-        return $this->render(self::PAGE_PLAYLISTS, [
+        return $this->render(PLAYLISTSPATH, [
             'playlists' => $playlists,
-            'categories' => $categories,
+            'categories' => $categories,            
             'valeur' => $valeur,
             'table' => $table
         ]);
-    }
+    }  
     
     /**
      * @Route("/playlists/playlist/{id}", name="playlists.showone")
@@ -107,11 +111,11 @@ class PlaylistsController extends AbstractController {
         $playlist = $this->playlistRepository->find($id);
         $playlistCategories = $this->categorieRepository->findAllForOnePlaylist($id);
         $playlistFormations = $this->formationRepository->findAllForOnePlaylist($id);
-        return $this->render(self::PAGE_PLAYLIST, [
+        return $this->render("pages/playlist.html.twig", [
             'playlist' => $playlist,
             'playlistcategories' => $playlistCategories,
             'playlistformations' => $playlistFormations
-        ]);
-    }
-
+        ]);        
+    }       
+    
 }
