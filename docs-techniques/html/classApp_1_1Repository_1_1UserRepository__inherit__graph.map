@@ -1,0 +1,8 @@
+<map id="App\Repository\UserRepository" name="App\Repository\UserRepository">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,79,231,104"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="29,5,207,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="112,44,114,78,108,79,107,45"/>
+<area shape="poly" id="edge2_Node000001_Node000002" title=" " alt="" coords="129,45,128,79,122,78,124,44"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="232,5,433,31"/>
+<area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="286,37,154,81,152,76,284,32"/>
+</map>

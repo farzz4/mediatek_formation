@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpdocumentor configVersion="3.10">
+    <title>Documentation Technique MediaTek</title>
+    <paths>
+        <output>docs-techniques</output>
+        <cache>/home/farida/phpdoc-cache</cache>
+    </paths>
+    <version number="latest">
+        <api>
+            <source dsn=".">
+                <path>src</path>
+            </source>
+            <ignore>
+                <path>vendor/**/*</path>
+            </ignore>
+            <extensions>
+                <extension>php</extension>
+            </extensions>
+            <visibility>public,protected,private</visibility>
+            <default-package-name>MediaTek</default-package-name>
+            <include-source>true</include-source>
+        </api>
+    </version>
+    <transformer>
+        <template name="clean" />
+    </transformer>
+</phpdocumentor>

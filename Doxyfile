@@ -1,0 +1,15 @@
+PROJECT_NAME           = "Documentation Technique MediaTek"
+PROJECT_BRIEF          = "Documentation du code source MediaTek"
+OUTPUT_DIRECTORY       = docs-techniques
+INPUT                  = src
+RECURSIVE              = YES
+EXTRACT_ALL            = YES
+EXTRACT_PRIVATE        = YES
+EXTRACT_STATIC         = YES
+EXCLUDE                = vendor tests
+GENERATE_LATEX         = NO
+GENERATE_HTML          = YES
+HTML_OUTPUT            = html
+GENERATE_TREEVIEW      = YES
+DISABLE_INDEX          = NO
+FULL_SIDEBAR           = YES

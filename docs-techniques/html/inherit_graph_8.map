@@ -1,0 +1,13 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="Node000000" title=" " alt="" coords="5,5,207,31"/>
+<area shape="rect" id="Node000001" href="$classApp_1_1Repository_1_1UserRepository.html" title=" " alt="" coords="263,5,489,31"/>
+<area shape="poly" id="edge15_Node000000_Node000001" title=" " alt="" coords="220,15,263,15,263,21,220,21"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="17,95,195,120"/>
+<area shape="poly" id="edge19_Node000002_Node000001" title=" " alt="" coords="143,86,195,63,254,41,302,28,303,33,255,46,197,68,145,91"/>
+<area shape="rect" id="Node000003" href="$classApp_1_1Repository_1_1CategorieRepository.html" title=" " alt="" coords="282,55,470,95"/>
+<area shape="poly" id="edge16_Node000002_Node000003" title=" " alt="" coords="209,93,282,84,282,89,209,98"/>
+<area shape="rect" id="Node000004" href="$classApp_1_1Repository_1_1FormationRepository.html" title=" " alt="" coords="281,119,471,159"/>
+<area shape="poly" id="edge17_Node000002_Node000004" title=" " alt="" coords="210,117,281,125,280,131,209,122"/>
+<area shape="rect" id="Node000005" href="$classApp_1_1Repository_1_1PlaylistRepository.html" title=" " alt="" coords="255,184,497,209"/>
+<area shape="poly" id="edge18_Node000002_Node000005" title=" " alt="" coords="145,123,197,147,255,169,303,181,302,186,254,174,195,152,143,128"/>
+</map>

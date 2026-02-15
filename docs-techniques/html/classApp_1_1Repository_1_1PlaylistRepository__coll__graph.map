@@ -1,0 +1,6 @@
+<map id="App\Repository\PlaylistRepository" name="App\Repository\PlaylistRepository">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,79,248,104"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="37,5,216,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="121,44,122,78,117,79,115,45"/>
+<area shape="poly" id="edge2_Node000001_Node000002" title=" " alt="" coords="138,45,136,79,131,78,133,44"/>
+</map>

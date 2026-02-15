@@ -1,0 +1,17 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="Node000000" title=" " alt="" coords="5,177,145,203"/>
+<area shape="rect" id="Node000001" href="$classApp_1_1Controller_1_1AccueilController.html" title=" " alt="" coords="193,5,424,31"/>
+<area shape="poly" id="edge1_Node000000_Node000001" title=" " alt="" coords="87,164,128,102,157,69,192,41,219,28,221,33,195,46,161,72,132,105,92,167"/>
+<area shape="rect" id="Node000002" href="$classApp_1_1Controller_1_1FormationsController.html" title=" " alt="" coords="213,55,405,95"/>
+<area shape="poly" id="edge2_Node000000_Node000002" title=" " alt="" coords="100,166,142,135,192,105,222,93,224,98,195,110,145,139,103,170"/>
+<area shape="rect" id="Node000003" href="$classApp_1_1Controller_1_1OAuthController.html" title=" " alt="" coords="197,120,420,145"/>
+<area shape="poly" id="edge3_Node000000_Node000003" title=" " alt="" coords="133,171,193,155,247,143,248,148,194,161,135,176"/>
+<area shape="rect" id="Node000004" href="$classApp_1_1Controller_1_1PlaylistsController.html" title=" " alt="" coords="221,170,396,210"/>
+<area shape="poly" id="edge4_Node000000_Node000004" title=" " alt="" coords="159,187,221,187,221,193,159,193"/>
+<area shape="rect" id="Node000005" href="$classApp_1_1Controller_1_1admin_1_1AdminCategoriesController.html" title=" " alt="" coords="207,234,410,274"/>
+<area shape="poly" id="edge5_Node000000_Node000005" title=" " alt="" coords="136,204,236,231,234,236,135,209"/>
+<area shape="rect" id="Node000006" href="$classApp_1_1Controller_1_1admin_1_1AdminFormationsController.html" title=" " alt="" coords="206,298,411,338"/>
+<area shape="poly" id="edge6_Node000000_Node000006" title=" " alt="" coords="100,211,142,248,195,284,222,296,220,300,192,288,139,253,97,215"/>
+<area shape="rect" id="Node000007" href="$classApp_1_1Controller_1_1admin_1_1AdminPlaylistsController.html" title=" " alt="" coords="215,362,402,402"/>
+<area shape="poly" id="edge7_Node000000_Node000007" title=" " alt="" coords="91,214,131,281,160,317,195,348,217,360,214,364,192,352,156,321,126,284,86,216"/>
+</map>

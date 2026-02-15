@@ -7,6 +7,7 @@ use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;  // ← IMPORT AJOUTÉ
 
 /**
  * @ORM\Entity(repositoryClass=FormationRepository::class)
@@ -27,6 +28,7 @@ class Formation
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
+     * @Assert\LessThanOrEqual("today", message="La date ne peut pas être dans le futur")
      */
     private $publishedAt;
 
